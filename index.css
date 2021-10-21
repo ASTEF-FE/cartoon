@@ -1,0 +1,434 @@
+@keyframes ship_animation {
+    from{
+        transform: translate(150px);
+    }
+    to{
+        transform:translate(-500px);
+    }
+}
+
+@keyframes smoke_animation{
+    from{
+        transform: translate(0);
+    }
+    50% {
+        transform: translateY(-5px) scale(1.5);
+            opacity: 0.8
+    }
+    75% {
+        transform: translateY(-10px) scale(1.5);
+            opacity: 0.5
+    }
+    to{
+            transform: translateY(-25px) scale(2);
+            opacity: 0
+        }
+    }
+
+@keyframes sun_animation{
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes cloud-1_animation{
+    from{
+        transform: translate(300px) scale(-0.25,0.25 );
+    }
+    to{
+        transform:translate(700px) scale(-0.25,0.25);
+    }
+}
+
+@keyframes cloud-2_animation{
+    from{
+        transform: translate(-10px) scale(0.5);
+    }
+    to{
+        transform:translate(500px) scale(0.5);
+    }
+}
+
+@keyframes cloud-3_animation{
+    from{
+        transform: translate(-10px) scale(-0.6,0.6);
+    }
+    to{
+        transform:translate(650px) scale(-0.6,0.6);
+    }
+}
+
+@keyframes cloud-4_animation{
+    from{
+        transform: translate(150px) scale(0.75);
+    }
+    to{
+        transform:translate(500px) scale(0.75);
+    }
+}
+
+@keyframes day {
+    40% {
+        background: darkslateblue;
+        box-shadow: 0 -400px 300px -300px orangered inset;
+    }
+    80% {
+        background: darkslateblue;
+        box-shadow: 0 -400px 300px -300px transparent inset;
+    }
+}
+
+/**----------------------------------------------------------------*/
+.canvas {
+    position: relative;
+    
+    width: 500px;
+    height: 380px;
+    margin: 80px 0 0 0;
+    
+    transition: .3s ease;
+    
+    perspective: 800px;
+    
+}
+
+.box_front {
+    position: relative;
+    
+    overflow: hidden;
+    
+    width: 500px;
+    height: 380px;
+    
+    background: skyblue;
+    box-shadow: 0 -400px 300px -300px steelblue inset;
+    animation: day 20s infinite;
+    /*
+    animation-name: day;
+    animation-duration: 20s; 
+    animation-iteration-count: infinite;*/
+}
+
+/*TODO
+Цвета неба задаются следующими свойствами:
+    День:
+        background: skyblue;
+        box-shadow: 0 -400px 300px -300px steelblue inset;
+    Вечер:
+        background: darkslateblue;
+        box-shadow: 0 -400px 300px -300px orangered inset;
+    Ночь:
+        background: darkslateblue;
+        box-shadow: 0 -400px 300px -300px transparent inset;
+        
+Нужно реализовать плавный переход между ними и зациклить его.
+*/
+
+.ship::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    
+    width: 100px;
+    height: 20px;
+    
+    content: '';
+    
+    border-radius: 0 0 0 20px;
+    background: #e25c45;
+
+}
+
+.ship::before {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    
+    width: 65px;
+    height: 16px;
+    
+    content: '';
+    
+    border-radius: 20px 0 0 0;
+    background: #fff;
+}
+
+.ship {
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    
+    width: 100px;
+    height: 36px;
+    animation: ship_animation 15s linear infinite;
+    /*
+    animation-name: ship_animation; 
+    animation-duration: 15s; 
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;*/
+}
+
+.ship_smokestack {
+    position: absolute;
+    bottom: 36px;
+    left: 45px;
+    
+    width: 10px;
+    height: 17px;
+    
+    background: #a18e6e;
+}
+
+.ship_window {
+    position: absolute;
+    top: 6px;
+    left: 40px;
+    
+    width: 7px;
+    height: 7px;
+    
+    border-radius: 50%;
+    background: #a18e6e;
+    box-shadow: 13px 0 0 0 #a18e6e, -13px 0 0 0 #a18e6e;
+}
+
+.smoke div {
+    position: absolute;
+    
+    width: 7px;
+    height: 7px;
+    
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0;
+
+}
+
+.smoke-1 {
+    top: -25px;
+    right: 44px;
+
+    animation: smoke_animation 1s  linear infinite;
+    /*
+    animation-name: smoke_animation;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; */
+    }
+
+.smoke-2 {
+    top: -25px;
+    right: 42px;
+    animation: smoke_animation 0.5s  linear infinite;
+    /*
+    animation-name: smoke_animation;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; */
+}
+
+.smoke-3 {
+    top: -25px;
+    right: 49px;
+    animation: smoke_animation 1.25s  linear infinite;
+    /*
+    animation-name: smoke_animation;
+    animation-duration: 1.25s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; */
+}
+
+.sun {
+    position: absolute;
+    top: 30px;
+    right: 50%;
+    
+    width: 80px;
+    height: 80px;
+    
+    border-radius: 50%;
+    background: #ffcf11;
+    box-shadow: 0 0 100px #ffdf05;
+    animation: sun_animation 10s  linear infinite;
+    /*
+    animation-name: sun_animation;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;*/
+
+}
+
+.sun-wrapper {
+    position: absolute;
+    
+    width: 100%;
+    height: 100%;
+    
+    transform-origin: bottom center;
+
+    animation: sun_animation 20s infinite linear;
+        
+}
+
+.sun div {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    
+    width: 2px;
+    height: 100px;
+    margin-left: -1px;
+    
+    border: solid #ffcf11;
+    border-width: 10px 0 10px 0;
+}
+
+.sun div:nth-child(2) {
+    transform: rotate(18deg);
+}
+
+.sun div:nth-child(3) {
+    transform: rotate(36deg);
+}
+
+.sun div:nth-child(4) {
+    transform: rotate(54deg);
+}
+
+.sun div:nth-child(5) {
+    transform: rotate(72deg);
+}
+
+.sun div:nth-child(6) {
+    transform: rotate(90deg);
+}
+
+.sun div:nth-child(7) {
+    transform: rotate(-18deg);
+}
+
+.sun div:nth-child(8) {
+    transform: rotate(-36deg);
+}
+
+.sun div:nth-child(9) {
+    transform: rotate(-54deg);
+}
+
+.sun div:nth-child(10) {
+    transform: rotate(-72deg);
+}
+
+.cloud {
+    position: absolute;
+    left: -180px;
+    
+    width: 200px;
+    height: 60px;
+    
+    opacity: .8;
+    border-radius: 200px;
+    background: #fff;
+}
+
+.cloud:before,
+.cloud:after {
+    position: absolute;
+    top: -15px;
+    left: 10px;
+    
+    width: 100px;
+    height: 80px;
+    
+    content: '';
+    
+    border-radius: 100px;
+    background: #fff;
+}
+
+.cloud:after {
+    top: -55px;
+    right: 15px;
+    left: auto;
+    
+    width: 120px;
+    height: 120px;
+}
+
+.cloud-1 {
+    top: 10px;
+    animation: cloud-1_animation 30s linear infinite alternate;
+    /*
+    animation-name: cloud-1_animation;
+    animation-duration: 30s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    
+        animation-direction: alternate;*/
+
+
+}
+
+.cloud-2 {
+    top: 50px;
+    animation: cloud-2_animation 20s linear infinite alternate;
+    /*
+    animation-name: cloud-2_animation;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    
+        animation-direction: alternate;*/
+
+}
+
+.cloud-3 {
+    top: 100px;
+    animation: cloud-3_animation 10s linear infinite alternate;
+    /*
+    animation-name: cloud-3_animation;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    
+        animation-direction: alternate; */
+
+}
+
+.cloud-4 {
+    top: 170px;
+    animation: cloud-4_animation 15s linear infinite alternate;
+    /*
+    animation-name: cloud-4_animation;
+    animation-duration: 15s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+        animation-direction: alternate;*/
+
+}
+
+.sea {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    
+    height: 40px;
+    
+    opacity: .8;
+    background: #2a94d6;
+}
+
+.sea::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    
+    height: 10px;
+    
+    content: '';
+    
+    background: #1d7fbb;
+}
